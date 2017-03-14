@@ -43,6 +43,7 @@ public class Viewer extends HttpServlet {
         
         if(raw) {
             response.setContentType("text/xml");
+            response.setCharacterEncoding("UTF-8");
             try (ServletOutputStream out =  response.getOutputStream()) {
                 out.print(doc.getXmlContent());
             }
