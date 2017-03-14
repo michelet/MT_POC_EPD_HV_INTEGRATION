@@ -5,19 +5,51 @@
  */
 package ch.bfh.masterarbeit.michelet_cedric.model;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  *
  * @author michelet
  */
 public class CDADocument {
+
     private String id;
     private String title;
     private String xmlContent;
-    
+
     public CDADocument(String id, String title, String xmlContent) {
         this.id = id;
         this.title = title;
         this.xmlContent = xmlContent;
+    }
+
+    /**
+     * Read and return the content of a sample CDA file contains in the project
+     * @param sampleName Name of the sample file
+     * @return XML Content of the sample
+     */
+    public static String getSampleContent(String sampleName) throws IOException {
+        InputStream is = CDADocument.class.getResourceAsStream("/ch/bfh/masterarbeit/michelet_cedric/sample/" + sampleName);
+
+        if (is == null) {
+            return null;
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+
+        br.close();
+        is.close();
+
+        return sb.toString();
     }
 
     public String getId() {
