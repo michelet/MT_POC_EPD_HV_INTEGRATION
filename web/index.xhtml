@@ -23,8 +23,8 @@
                 <ui:repeat value="#{documentsBean.documents}" var="doc">
                     <tr>
                         <td>
-                            <a href="index.xhtml?docId=#{doc.id}">[V]</a>
-                            <a href="index.xhtml?raw=true&amp;docId=#{doc.id}">[RAW]</a>
+                            <a href="?docId=#{doc.id}">[V]</a>
+                            <a href="?raw=true&amp;docId=#{doc.id}">[RAW]</a>
                         </td>
                         <td></td>
                         <td>#{doc.title}</td>
