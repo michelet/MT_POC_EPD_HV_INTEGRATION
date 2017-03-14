@@ -19,6 +19,9 @@ import javax.faces.bean.SessionScoped;
 public class DocumentsBean {
     private final ArrayList<CDADocument> documents;
     
+    /**
+     * Constructor
+     */
     public DocumentsBean() {
         documents = new ArrayList<>();
         this._loadSampleData();
@@ -35,5 +38,25 @@ public class DocumentsBean {
         } catch(IOException e) {
             //@TODO handle error
         }
+    }
+    
+    /**
+     * Get all the documents
+     * @return List of documents (CDADocument)
+     */
+    public ArrayList<CDADocument> getDocuments() {
+        return documents;
+    }
+   
+    /**
+     * Get a specific document by its ID
+     * @param id ID of the document to retrieve
+     * @return CDADocument (or null if not found)
+     */
+    public CDADocument getDocumentById(String id) {
+        for(CDADocument doc : documents) {
+            if(doc.getId().equals(id)) return doc;
+        }
+        return null;
     }
 }
