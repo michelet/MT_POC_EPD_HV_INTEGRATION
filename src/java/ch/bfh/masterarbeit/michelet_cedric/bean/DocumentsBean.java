@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.bfh.masterarbeit.michelet_cedric.bean;
 import ch.bfh.masterarbeit.michelet_cedric.model.CDADocument;
 import java.io.IOException;
@@ -11,7 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
- *
+ * Bean that store all the documents.
+ * The documents are stored in memory, and when the server is restarted all the new added documents are lost.
  * @author michelet
  */
 @ManagedBean
