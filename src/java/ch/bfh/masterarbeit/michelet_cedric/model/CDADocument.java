@@ -61,8 +61,8 @@ public class CDADocument {
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-        return br.lines().collect(Collectors.joining("\n"));
-        /*StringBuilder sb = new StringBuilder();
+        //return br.lines().collect(Collectors.joining("\n"));
+        StringBuilder sb = new StringBuilder();
 
         String line;
         while ((line = br.readLine()) != null) {
@@ -72,7 +72,7 @@ public class CDADocument {
         br.close();
         is.close();
 
-        return sb.toString();*/
+        return sb.toString();
     }
 
     public String getId() {
