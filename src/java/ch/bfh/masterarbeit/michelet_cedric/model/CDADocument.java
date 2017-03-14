@@ -80,16 +80,8 @@ public class CDADocument {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getXmlContent() {
         return xmlContent;
-    }
-
-    public void setXmlContent(String xmlContent) {
-        this.xmlContent = xmlContent;
     }
 
     public String getContentType() {
