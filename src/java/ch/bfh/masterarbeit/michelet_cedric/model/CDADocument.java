@@ -15,17 +15,37 @@ import java.io.InputStreamReader;
  * @author michelet
  */
 public class CDADocument {
-
     private String id;
     private String title;
     private String xmlContent;
+    private String contentType="";
+    private String bodyContent="";
+    private Boolean isBodyEncodedInBase64=false;
 
     public CDADocument(String id, String title, String xmlContent) {
         this.id = id;
         this.title = title;
         this.xmlContent = xmlContent;
+        this._extractContent();
     }
 
+    private void _extractContent() {
+        int start = xmlContent.indexOf("representation=\"B64\"");
+        if(start >= 0) isBodyEncodedInBase64 = true;
+        
+        start = xmlContent.indexOf("mediaType=") + "mediaType=".length();
+        if(start < 0) return;
+        int stop = xmlContent.indexOf("\"",start+2);
+        if(stop < 0) return;
+        contentType = xmlContent.substring(start+1, stop).trim();
+        
+        start = xmlContent.indexOf(">",stop);
+        if(start < 0) return;
+        stop = xmlContent.indexOf("</text>");
+        if(stop < 0) return;
+        bodyContent = xmlContent.substring(start+1,stop).trim();
+    }
+    
     /**
      * Read and return the content of a sample CDA file contains in the project
      * @param sampleName Name of the sample file
@@ -70,5 +90,17 @@ public class CDADocument {
 
     public void setXmlContent(String xmlContent) {
         this.xmlContent = xmlContent;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public String getBodyContent() {
+        return bodyContent;
+    }
+
+    public Boolean getIsBodyEncodedInBase64() {
+        return isBodyEncodedInBase64;
     }
 }
