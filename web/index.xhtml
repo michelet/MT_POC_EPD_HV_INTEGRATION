@@ -8,32 +8,30 @@
         <link type="text/css" rel="stylesheet" href="inc/global.css" />
     </h:head>
     <h:body>
-        <div>
-            myEPR
-            The Electronic Patient Record
+        <div id="header">
+            EPR - Electronic Patient Record
         </div>
-        <h1 class="title">List of documents</h1>
-        <table class="documents">
-            <thead>
-                <th>Action</th>
-                <th>Date</th>
-                <th>Name</th>
-            </thead>
-            <tbody>
-                <ui:repeat value="#{documentsBean.documents}" var="doc">
-                    <tr>
-                        <td>
-                            <a href="?docId=#{doc.id}">[V]</a>
-                            <a href="?raw=true&amp;docId=#{doc.id}">[RAW]</a>
-                        </td>
-                        <td></td>
-                        <td>#{doc.title}</td>
-                    </tr>
-                </ui:repeat>
-            </tbody>
-        </table>
-        
-        <iframe style="width:1200px;height:800px" src="Viewer?raw=#{param['raw']}&amp;docId=#{param['docId']}"></iframe>
+        <div id="content">
+            <h1 class="title">List of documents</h1>
+            <table class="documents">
+                <thead>
+                    <th class="action">Action</th>
+                    <th class="name">Name</th>
+                </thead>
+                <tbody>
+                    <ui:repeat value="#{documentsBean.documents}" var="doc">
+                        <tr>
+                            <td>
+                                <a href="?docId=#{doc.id}">[V]</a>
+                                <a href="?raw=true&amp;docId=#{doc.id}">[RAW]</a>
+                            </td>
+                            <td>#{doc.title}</td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+            <iframe style="width:1200px;height:800px" src="Viewer?raw=#{param['raw']}&amp;docId=#{param['docId']}"></iframe>
+        </div>
     </h:body>
 </html>
 
