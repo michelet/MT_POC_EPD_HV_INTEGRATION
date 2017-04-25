@@ -10,11 +10,11 @@ import javax.faces.bean.SessionScoped;
  * The documents are stored in memory, and when the server is restarted all the new added documents are lost.
  * @author michelet
  */
-@ManagedBean
+@ManagedBean(name="documentsBean")
 @SessionScoped
 public class DocumentsBean {
-    private final ArrayList<CDADocument> documents;
-    
+    private ArrayList<CDADocument> documents;
+        
     /**
      * Constructor
      */
@@ -28,9 +28,8 @@ public class DocumentsBean {
      */
     private void _loadSampleData() {
         try {
-            documents.add(new CDADocument("1", "test 1.1", CDADocument.getSampleContent("sample1.xml")));
-            documents.add(new CDADocument("2", "test 2", "body"));
-            documents.add(new CDADocument("3", "test 3", "body"));
+            documents.add(new CDADocument("1", "Discharge sumary", CDADocument.getSampleContent("sample1.xml")));
+            documents.add(new CDADocument("2", "Radiology report", CDADocument.getSampleContent("sample2.xml")));
         } catch(IOException e) {
             //@TODO handle error
         }
@@ -54,5 +53,13 @@ public class DocumentsBean {
             if(doc.getId().equals(id)) return doc;
         }
         return null;
+    }
+    
+    /**
+     * Add a document to the list.
+     * @param document 
+     */
+    public void addDocument(CDADocument document) {
+        documents.add(document);
     }
 }
