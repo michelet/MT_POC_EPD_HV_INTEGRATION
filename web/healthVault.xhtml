@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"       
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <title>EPR - Electronic Patient Record</title>
+        <link type="text/css" rel="stylesheet" href="inc/global.css" />
+        <script type="text/javascript" src="inc/script.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <a href="index.xhtml" style="color:white;text-decoration:none;">EPR - Electronic Patient Record</a>
+        </div>
+        <div id="content">
+            <h1 class="title">HealthVault</h1>
+            
+            <c:if test="#{healthVaultBean.lastError !=null}">
+                <div id="error">
+                    <span>Sorry, an error occured!</span>
+                    #{healthVaultBean.lastError}
+                    <br />
+                    <a href="javascript:viewStacktrace();">StackTrace</a>
+                    <div id="stacktrace" style="display:none">
+                        <h:outputText value="#{healthVaultBean.lastErrorStackTrace}" escape="false" />
+                    </div>
+                </div>
+            </c:if>
+            
+            <div id="filters">
+                <c:if test="#{healthVaultBean.authToken == null}">
+                    <span class="authenticate">
+                        You are not connected. Please authenticate.<br /><br />
+                        <a class="button" href="#{healthVaultBean.authURL}"><img src="images/authenticate.png" /> Authenticate</a>
+                    </span>
+                </c:if>
+                <c:if test="#{healthVaultBean.authToken != null}">
+                    <span class="filter">
+                        <h3>Filters data by</h3>
+                        <form id="fFilters" method="post" action="healthVault.xhtml">
+                            <input type="hidden" name="filter" value="true" />
+                            From <input type="text" name="from" value="#{healthVaultBean.filter_from}"  /> to <input type="text" name="to" value="#{healthVaultBean.filter_to}"  /><br />
+                            
+                            <input type="checkbox" id="cb_weight" name="weight" />Weight<br />
+                            <c:if test="#{healthVaultBean.filter_weight}"><script>document.getElementById("cb_weight").checked='checked';</script></c:if>
+                            <input type="checkbox" id="cb_bloodPressure" name="blood_pressure" />Blood pressure<br />
+                            <c:if test="#{healthVaultBean.filter_bloodPressure}"><script>document.getElementById("cb_bloodPressure").checked='checked';</script></c:if>
+                            <input type="checkbox" id="cb_bloodGlucose" name="blood_glucose" />Blood glucose<br />
+                            <c:if test="#{healthVaultBean.filter_bloodGlucose}"><script>document.getElementById("cb_bloodGlucose").checked='checked';</script></c:if>
+                            <br />                            
+                            <a class="button" href="javascript:document.getElementById('fFilters').submit();"><img src="images/fetch.png" /> Get values</a>
+                        </form>
+                    </span>
+                </c:if>
+            </div>
+            
+            <c:if test="#{healthVaultBean.tempCDADocument !=null}">
+                <br /><br />
+                <h2>
+                    Preview document
+                </h2>
+                <a class="button" href="ImportTempDocument"><img src="images/import.png" /> Import document</a>
+                <iframe src="Viewer?docId=SESSION" style="height:300px !important"></iframe>
+            </c:if>
+        </div>
+        
+        
+        <c:if test="#{healthVaultBean.DEBUG_MODE == true}">
+            <br /><hr /><br />
+
+            Login<br />
+            <br />
+            URL APPAUTH: <a href="#{healthVaultBean.loginURL}">#{healthVaultBean.loginURL}</a><br />
+            <br />
+            URL AUTH: <a href="#{healthVaultBean.authURL}">#{healthVaultBean.authURL}</a><br />
+            <br /><br />
+            <b>authToken:</b> #{healthVaultBean.authToken}
+            <br /><br />
+            <b>recordId</b> #{healthVaultBean.recordId}
+            <br /><br />
+            <b>Last error:</b> #{healthVaultBean.lastError}
+            <br /><br />
+            <b>Last error StackTrace:</b> <h:outputText value="#{healthVaultBean.lastErrorStackTrace}" escape="false" />
+            <br /><br />
+            <b>Result:</b> <h:outputText value="#{healthVaultBean.lastXMLResult}" escape="true" />
+        </c:if>
+        
+        <br />    
+        <a class="credit" href="https://icons8.com/">Icons from https://icons8.com/</a>
+    </body>
+</html>
