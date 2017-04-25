@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/Viewer"})
 public class Viewer extends HttpServlet {
-
+    public static final String SESSION_TEMP_NAME = "TEMP_CDA_DOCUMENT";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,9 +35,16 @@ public class Viewer extends HttpServlet {
         
         Boolean raw = request.getParameter("raw") != null && request.getParameter("raw").equals("true");
         
-        DocumentsBean documentsBean = (DocumentsBean) request.getSession().getAttribute("documentsBean");
-        if(documentsBean == null) return;
-        CDADocument doc = documentsBean.getDocumentById(docId);
+        //get document. In session if requested, other in stored documents
+        CDADocument doc = null;
+        if(docId.equals("SESSION")) {
+            doc = (CDADocument)request.getSession().getAttribute(Viewer.SESSION_TEMP_NAME);
+        } else {
+            DocumentsBean documentsBean = (DocumentsBean) request.getSession().getAttribute("documentsBean");
+            if(documentsBean == null) return;
+            doc = documentsBean.getDocumentById(docId);
+        }
+        
         if(doc == null) return;
         
         //String contentType = "text/html";
