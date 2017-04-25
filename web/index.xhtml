@@ -4,16 +4,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:head>
+    <head>
         <title>EPR - Electronic Patient Record</title>
         <link type="text/css" rel="stylesheet" href="inc/global.css" />
-    </h:head>
-    <h:body>
+    </head>
+    <body>
         <div id="header">
-            EPR - Electronic Patient Record
+            <a href="index.xhtml" style="color:white;text-decoration:none;">EPR - Electronic Patient Record</a>
         </div>
         <div id="content">
             <h1 class="title">List of documents</h1>
+            <a class="button" href="healthVault.xhtml"><img src="images/import.png" /> Import new document</a>
             <table class="documents">
                 <thead>
                     <th class="action">Action</th>
@@ -23,8 +24,8 @@
                     <ui:repeat value="#{documentsBean.documents}" var="doc">
                         <tr>
                             <td>
-                                <a href="?docId=#{doc.id}">[V]</a>
-                                <a href="?raw=true&amp;docId=#{doc.id}">[RAW]</a>
+                                <a href="?docId=#{doc.id}"><img src="images/view.png" /></a>
+                                <a href="?raw=true&amp;docId=#{doc.id}"><img src="images/view_xml.png" /></a>
                             </td>
                             <td>#{doc.title}</td>
                         </tr>
@@ -33,12 +34,12 @@
             </table>
             <c:if test="#{param['docId']!=null}">
                 <h2>
-                    <a href="?">[X]</a>
+                    <a href="?"><img src="images/close.png" style="vertical-align:text-top;width:25px;height:25px;" /></a>
                     Preview document
                 </h2>
                 <iframe src="Viewer?raw=#{param['raw']}&amp;docId=#{param['docId']}"></iframe>
             </c:if>
         </div>
-    </h:body>
+        <a class="credit" href="https://icons8.com/">Icons from https://icons8.com/</a>
+    </body>
 </html>
-
