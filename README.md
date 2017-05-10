@@ -1,5 +1,5 @@
 # MT_POC_EPD_HV_INTEGRATION
-##Master Thesis Proof of Concept - Electronic Patient Record (EPR) with HealthVault (Microsoft) Integration
+## Master Thesis Proof of Concept - Electronic Patient Record (EPR) with HealthVault (Microsoft) Integration
 03-04.2017
 
 
@@ -12,6 +12,10 @@ The goal is to show how it is possible for a web application (EPR) to:
 3. Convert them into a HL7 CDA
 4. Display them to a user
 
-##Authentication
+## Authentication
 This POC doesn't work out of the box because it doesn't contain the keystore (JKS) with a valid certificate. As this certificate is related to a specific developer, it is not enclosed here publicly.
 
+## Video overview
+[![Alt text](https://img.youtube.com/vi/oedRltFROvo/0.jpg)](https://www.youtube.com/watch?v=oedRltFROvo)
+
+https://youtu.be/oedRltFROvo
